@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import logger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 import axios from "axios";
+import './index.css';
 
 //middle stuff
 const sagaMiddleware = createSagaMiddleware()
@@ -31,7 +32,7 @@ const giphyDBList = (state = [], action) => {
 
 
 //sagas
-function* rootSaga() {  
+function* rootSaga() {
     yield takeLatest('FETCH_GIPHS', fetchSearchGiphs)
     yield takeLatest("CHANGE_CAT", changeFavCat)
 }
@@ -39,11 +40,15 @@ function* rootSaga() {
 function* fetchSearchGiphs(action) {
 
     const apiKey = process.env.GIPHY_API_KEY
+    //console.log(process.env.GIPHY_API_KEY)
     try {
-        const searchResponse = yield axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}`)
-        yield put({ type: 'SET_GIPHS', payload: searchResponse.data})
+
+        const searchResponse = yield axios.get
+        (`https://api.giphy.com/v1/gifs/search?q=${'puppy'}&api_key=gg2ehDK1mfjXtt3OC9UjmPK1cE6Jp2fd`)
+        console.log("in fetch", searchResponse)
+        yield put({ type: 'SET_GIPHS', payload: searchResponse.data })
     }
-    catch(error){
+    catch (error) {
         console.log('Error fetchng search giphs', error)
     }
 }
@@ -73,7 +78,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-        <App />
+            <App />
         </Provider>
     </React.StrictMode>
 );
