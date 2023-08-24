@@ -8,7 +8,7 @@ function GiphyList (){
     const giphySearchList = useSelector((store) => store.giphySearchList)
 
     useEffect(() => {
-        getGiphs()
+        // getGiphs()
     }, [])
 
     const getGiphs = () => {
