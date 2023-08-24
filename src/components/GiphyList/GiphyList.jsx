@@ -12,7 +12,7 @@ function GiphyList (){
     }, [])
 
     const getGiphs = () => {
-        dispatch({ type: 'SET_GIPHS'})
+        dispatch({ type: 'FETCH_GIPHS'})
     }
 
     return (
