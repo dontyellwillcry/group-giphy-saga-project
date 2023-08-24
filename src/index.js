@@ -14,7 +14,12 @@ const sagaMiddleware = createSagaMiddleware()
 //reducers
 const giphySearchList = (state = [], action) => {
     console.log('yay giphySearchList be workin')
-    return state
+    switch (action.type) {
+        case 'SET_GIPHS':
+            return action.payload
+        default:
+            return state
+    }
 }
 
 const giphyDBList = (state = [], action) => {
@@ -30,7 +35,13 @@ function* rootSaga() {
 }
 
 function* fetchSearchGiphs(action) {
-
+    try {
+        const searchResponse = yield axios.get('/favorite.router')
+        yield put({ type: 'SET_GIPHS', payload: searchResponse.data})
+    }
+    catch(error){
+        console.log('Error fetchng search giphs', error)
+    }
 }
 
 const store = createStore(
