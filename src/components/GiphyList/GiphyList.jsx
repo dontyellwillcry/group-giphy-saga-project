@@ -16,8 +16,11 @@ function GiphyList() {
     // }, [])
 
     const getGiphs = () => {
+
         console.log('in getGiphs"')
         dispatch({ type: 'FETCH_GIPHS' })
+        
+
     }
 
 
