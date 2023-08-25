@@ -44,7 +44,7 @@ function* fetchSearchGiphs(action) {
     try {
 
         const searchResponse = yield axios.get
-        (`https://api.giphy.com/v1/gifs/search?q=${'puppy'}&api_key=gg2ehDK1mfjXtt3OC9UjmPK1cE6Jp2fd`)
+        (`https://api.giphy.com/v1/gifs/search?q='puppy'&limit=5&api_key=gg2ehDK1mfjXtt3OC9UjmPK1cE6Jp2fd`)
         console.log("in fetch", searchResponse)
         yield put({ type: 'SET_GIPHS', payload: searchResponse.data })
     }
