@@ -3,26 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 function GiphyList() {
-    console.log("in GiphyList TADA")
+
 
     const dispatch = useDispatch();
     const giphySearchList = useSelector((store) => store.giphySearchList)
-
-    //let testGiph = giphySearchList.data
-    //console.log("?",giphySearchList.data)
-    //console.log("gSL",giphySearchList.data.data[0].id)
-    // useEffect(() => {
-    //     // getGiphs()
-    // }, [])
 
     const getGiphs = () => {
 
         console.log('in getGiphs"')
         dispatch({ type: 'FETCH_GIPHS' })
-        
-
     }
 
+    console.log(giphySearchList[0].images.original.url)
 
     return (
         <>
@@ -31,7 +23,7 @@ function GiphyList() {
                 <button className="searchButton" onClick={getGiphs}>SEARCH</button>
             </div>
             <div>
-                <img src={giphySearchList.data[1].url} alt="GIF" />
+                <img src={giphySearchList[0].images.original.url} alt="GIF" />
             </div>
         </>
     )

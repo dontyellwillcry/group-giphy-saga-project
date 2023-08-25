@@ -14,7 +14,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 //reducers
 const giphySearchList = (state = [], action) => {
-    console.log('yay giphySearchList be workin')
+
     switch (action.type) {
         case 'SET_GIPHS':
             return action.payload
@@ -24,7 +24,6 @@ const giphySearchList = (state = [], action) => {
 }
 
 const giphyDBList = (state = [], action) => {
-    console.log('yay giphyDBList workin it')
     
     return state
 }
@@ -39,14 +38,10 @@ function* rootSaga() {
 
 function* fetchSearchGiphs(action) {
 
-    const apiKey = process.env.GIPHY_API_KEY
-    //console.log(process.env.GIPHY_API_KEY)
     try {
-
-        const searchResponse = yield axios.get
-        (`https://api.giphy.com/v1/gifs/search?q=${'puppy'}&api_key=gg2ehDK1mfjXtt3OC9UjmPK1cE6Jp2fd`)
-        console.log("in fetch", searchResponse)
-        yield put({ type: 'SET_GIPHS', payload: searchResponse.data })
+        const searchResponse = yield axios.get('/api/search')
+        // console.log('GET response', searchResponse.data.data)
+        yield put({ type: 'SET_GIPHS', payload: searchResponse.data.data })
     }
     catch (error) {
         console.log('Error fetchng search giphs', error)
