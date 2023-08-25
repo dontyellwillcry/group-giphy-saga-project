@@ -27,7 +27,7 @@ function GiphyList() {
 function addFavorite(gif) {
     dispatch({
     type: "ADD_FAVORITE",
-    payload: gif.id,
+    payload: {id: gif.id, url: gif.url},
 });
 }
 //   console.log("gSL",giphySearchList.data)
