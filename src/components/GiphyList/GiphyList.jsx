@@ -21,7 +21,7 @@ function GiphyList() {
   const getGiphs = () => {
     console.log('in getGiphs"');
     dispatch({ type: "FETCH_GIPHS" });
-    // console.log("gSL",giphySearchList.data[0].images.original.url)
+    // console.log("gSL",giphySearchList.data)
   };
 
   return (
@@ -40,6 +40,7 @@ function GiphyList() {
             {giphySearchList.data.map((gif) => (
               <li key={gif.id}>
                 <img src={gif.images.original.url} alt={gif.title} />
+                <button>Favorite</button>
               </li>
             ))}
           </ul>
