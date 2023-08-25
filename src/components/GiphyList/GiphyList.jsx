@@ -14,7 +14,9 @@ function GiphyList() {
         dispatch({ type: 'FETCH_GIPHS' })
     }
 
-    console.log(giphySearchList[0].images.original.url)
+    useEffect( () => {
+        getGiphs
+    }, [])
 
     return (
         <>
@@ -22,9 +24,14 @@ function GiphyList() {
                 <input id="searchForm" type="text" placeholder="search"></input>
                 <button className="searchButton" onClick={getGiphs}>SEARCH</button>
             </div>
-            <div>
-                <img src={giphySearchList[0].images.original.url} alt="GIF" />
-            </div>
+            {
+                giphySearchList.map( (item => (
+                    <div key={item.id}>
+                        <img src={item.images.original.url} alt="GIF" />
+                    </div> 
+                )))
+            }
+            {/* */}
         </>
     )
 }

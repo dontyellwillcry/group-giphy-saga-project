@@ -40,7 +40,7 @@ function* fetchSearchGiphs(action) {
 
     try {
         const searchResponse = yield axios.get('/api/search')
-        // console.log('GET response', searchResponse.data.data)
+        console.log('GET response', searchResponse.data.data)
         yield put({ type: 'SET_GIPHS', payload: searchResponse.data.data })
     }
     catch (error) {

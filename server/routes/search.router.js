@@ -7,6 +7,7 @@ const router = express.Router();
 // return all favorite images
 router.get('/', (req, res) => {
 
+    console.log('in GET')
     const searchParam = 'puppy'
     const apiKey = process.env.GIPHY_API_KEY
 
