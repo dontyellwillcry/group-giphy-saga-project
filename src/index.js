@@ -24,6 +24,7 @@ const giphySearchList = (state = [], action) => {
 }
 
 const giphyDBList = (state = [], action) => {
+
     
     return state
 }
@@ -34,6 +35,8 @@ const giphyDBList = (state = [], action) => {
 function* rootSaga() {
     yield takeLatest('FETCH_GIPHS', fetchSearchGiphs)
     yield takeLatest("CHANGE_CAT", changeFavCat)
+    yield takeLatest("ADD_FAVORITE", updateFavorite);
+
 }
 
 function* fetchSearchGiphs(action) {
@@ -50,6 +53,16 @@ function* fetchSearchGiphs(action) {
         console.log('Error fetchng search giphs', error)
     }
 }
+function* updateFavorite(action) {
+    try {
+      // Using 'yield' to wait for the POST request to complete
+      yield axios.post("/favorites", action.payload);
+      // Dispatching an action to fetch the latest elements list
+      yield put({ type: "SET_FAVORITES" });
+    } catch (error) {
+      console.log("error posting a basket", error);
+    }
+  }
 
 function* changeFavCat(action) {
 

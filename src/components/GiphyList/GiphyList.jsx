@@ -22,10 +22,18 @@ function GiphyList() {
   const getGiphs = () => {
     console.log('in getGiphs"');
     dispatch({ type: "FETCH_GIPHS" });
-    // console.log("gSL",giphySearchList.data)
   };
 
+function addFavorite(gif) {
+    dispatch({
+    type: "ADD_FAVORITE",
+    payload: gif.id,
+});
+}
+//   console.log("gSL",giphySearchList.data)
+
   return (
+    
     <>
       <div>
         <input id="searchForm" type="text" placeholder="search"></input>
@@ -41,7 +49,7 @@ function GiphyList() {
             {giphySearchList.data.map((gif) => (
               <li key={gif.id}>
                 <img src={gif.images.original.url} alt={gif.title} />
-                <button>Favorite</button>
+                <button onClick={() => addFavorite(gif)}>FAVORITE</button>
               </li>
             ))}
           </ul>
@@ -51,6 +59,8 @@ function GiphyList() {
       </div>
     </>
   );
+      console.log("gSL",giphySearchList.data)
+
 }
 
 export default GiphyList;
