@@ -4,7 +4,7 @@ const axios = require('axios')
 
 const router = express.Router();
 
-let searchParam = 'puppy'
+let searchParam = ''
 
 // return all favorite images
 router.get('/', (req, res) => {

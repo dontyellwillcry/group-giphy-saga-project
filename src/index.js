@@ -17,6 +17,7 @@ const giphySearchList = (state = [], action) => {
 
     switch (action.type) {
         case 'SET_GIPHS':
+            console.log(action.payload)
             return action.payload
         default:
             return state
@@ -31,6 +32,7 @@ function* searchQuery(action) {
     console.log(action.payload)
     try {
         const searchQuery = yield axios.post('/api/search', {query: action.payload})
+        
     } catch (error) {
         console.log('error posting search query', error)
     }

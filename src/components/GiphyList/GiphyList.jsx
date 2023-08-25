@@ -11,7 +11,9 @@ function GiphyList() {
     const [query, setQuery] = useState('')
 
     const getGiphs = () => {
+        dispatch({type: 'UPDATE_QUERY', payload: query})
         dispatch({ type: 'FETCH_GIPHS' })
+        setQuery('')
     }
 
     useEffect( () => {
@@ -23,7 +25,6 @@ function GiphyList() {
             <div>
                 <input id="searchForm" type="text" placeholder="search" onChange={event => {
                     setQuery(event.target.value)
-                    dispatch({type: 'UPDATE_QUERY', payload: query})
                 }} />
                 <button className="searchButton" onClick={getGiphs}>SEARCH</button>
             </div>
