@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
 
     axios.get(`https://api.giphy.com/v1/gifs/search?q=${searchParam}&api_key=${apiKey}`)
     .then( response => {
+        console.log(response.data)
         res.send(response.data)
     })
     .catch( error => {
