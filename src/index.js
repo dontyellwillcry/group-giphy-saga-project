@@ -15,6 +15,7 @@ const sagaMiddleware = createSagaMiddleware();
 //reducers
 // Holds our response from our Giphy api GET
 const giphySearchList = (state = [], action) => {
+
   switch (action.type) {
     case "SET_GIPHS":
       return action.payload;
@@ -31,6 +32,15 @@ const giphyDBList = (state = [], action) => {
       return state;
   }
 };
+function* searchQuery(action) {
+    console.log(action.payload)
+    try {
+        const searchQuery = yield axios.post('/api/search', {query: action.payload})
+        
+    } catch (error) {
+        console.log('error posting search query', error)
+    }
+}
 
 //sagas
 function* rootSaga() {
@@ -38,6 +48,8 @@ function* rootSaga() {
   yield takeLatest("CHANGE_CAT", changeFavCat);
   yield takeLatest("ADD_FAVORITE", updateFavorite);//Runs our POST to /favorites
   yield takeLatest("GET_FAVORITE", getFavorite);
+  yield takeLatest("UPDATE_QUERY", searchQuery)
+
 }
 
 
@@ -84,13 +96,17 @@ function* changeFavCat(action) {
   }
 }
 
+
+
 const store = createStore(
-  combineReducers({
-    giphySearchList,
-    giphyDBList,
-  }),
-  applyMiddleware(sagaMiddleware, logger)
-);
+
+    combineReducers({
+        giphySearchList,
+        giphyDBList,
+    }),
+    applyMiddleware(sagaMiddleware, logger)
+)
+
 
 sagaMiddleware.run(rootSaga);
 const root = ReactDOM.createRoot(document.getElementById("root"));

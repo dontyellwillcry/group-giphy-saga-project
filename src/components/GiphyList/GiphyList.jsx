@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function GiphyList() {
@@ -7,6 +7,8 @@ function GiphyList() {
 
   const dispatch = useDispatch();
   const giphySearchList = useSelector((store) => store.giphySearchList);
+      const [query, setQuery] = useState('')
+
 
   //let testGiph = giphySearchList.data
 
@@ -20,8 +22,9 @@ function GiphyList() {
   // Any console log needed to happend below the dispatch.
 
   const getGiphs = () => {
-    console.log('in getGiphs"');
-    dispatch({ type: "FETCH_GIPHS" });
+    dispatch({type: 'UPDATE_QUERY', payload: query})
+        dispatch({ type: 'FETCH_GIPHS' })
+        setQuery('')
   };
 
 function addFavorite(gif) {
@@ -60,6 +63,7 @@ function addFavorite(gif) {
     </>
   );
       console.log("gSL",giphySearchList.data)
+
 
 }
 
