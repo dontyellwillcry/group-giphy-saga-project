@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function GiphyList() {
+
   console.log("in GiphyList TADA");
 
   const dispatch = useDispatch();
