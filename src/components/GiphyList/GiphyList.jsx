@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -8,9 +8,9 @@ function GiphyList() {
     const dispatch = useDispatch();
     const giphySearchList = useSelector((store) => store.giphySearchList)
 
-    const getGiphs = () => {
+    const [query, setQuery] = useState('')
 
-        console.log('in getGiphs"')
+    const getGiphs = () => {
         dispatch({ type: 'FETCH_GIPHS' })
     }
 
@@ -21,7 +21,10 @@ function GiphyList() {
     return (
         <>
             <div>
-                <input id="searchForm" type="text" placeholder="search"></input>
+                <input id="searchForm" type="text" placeholder="search" onChange={event => {
+                    setQuery(event.target.value)
+                    dispatch({type: 'UPDATE_QUERY', payload: query})
+                }} />
                 <button className="searchButton" onClick={getGiphs}>SEARCH</button>
             </div>
             {

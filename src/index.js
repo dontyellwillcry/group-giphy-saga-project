@@ -24,20 +24,26 @@ const giphySearchList = (state = [], action) => {
 }
 
 const giphyDBList = (state = [], action) => {
-    
     return state
 }
 
-
+function* searchQuery(action) {
+    console.log(action.payload)
+    try {
+        const searchQuery = yield axios.post('/api/search', {query: action.payload})
+    } catch (error) {
+        console.log('error posting search query', error)
+    }
+}
 
 //sagas
 function* rootSaga() {
     yield takeLatest('FETCH_GIPHS', fetchSearchGiphs)
     yield takeLatest("CHANGE_CAT", changeFavCat)
+    yield takeLatest("UPDATE_QUERY", searchQuery)
 }
 
 function* fetchSearchGiphs(action) {
-
     try {
         const searchResponse = yield axios.get('/api/search')
         console.log('GET response', searchResponse.data.data)
@@ -60,10 +66,12 @@ function* changeFavCat(action) {
       }
 }
 
+
+
 const store = createStore(
     combineReducers({
         giphySearchList,
-        giphyDBList
+        giphyDBList,
     }),
     applyMiddleware(sagaMiddleware, logger)
 )
