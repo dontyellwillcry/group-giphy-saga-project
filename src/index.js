@@ -39,9 +39,12 @@ function* rootSaga() {
 function* fetchSearchGiphs(action) {
 
     try {
+
+
         const searchResponse = yield axios.get('/api/search')
-        console.log('GET response', searchResponse.data.data)
-        yield put({ type: 'SET_GIPHS', payload: searchResponse.data.data })
+        console.log("in fetch", searchResponse)
+        yield put({ type: 'SET_GIPHS', payload: searchResponse.data })
+
     }
     catch (error) {
         console.log('Error fetchng search giphs', error)
